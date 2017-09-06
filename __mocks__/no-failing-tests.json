@@ -1,0 +1,34 @@
+[
+  {
+    "filePath": "/Users/jonathangertig/sidework/npm packages/eslint-junit/constants/index.js",
+    "messages": [],
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0
+  },
+  {
+    "filePath": "/Users/jonathangertig/sidework/npm packages/eslint-junit/utils/buildJsonResults.js",
+    "messages": [],
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0
+  },
+  {
+    "filePath": "/Users/jonathangertig/sidework/npm packages/eslint-junit/utils/getOptions.js",
+    "messages": [],
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0
+  },
+  {
+    "filePath": "/Users/jonathangertig/sidework/npm packages/eslint-junit/index.js",
+    "messages": [],
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0
+  }
+]

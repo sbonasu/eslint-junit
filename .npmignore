@@ -1,0 +1,58 @@
+# Automatically ignored per:
+# https://www.npmjs.org/doc/developers.html#Keeping-files-out-of-your-package
+#
+# .*.swp
+# ._*
+# .DS_Store
+# .git
+# .hg
+# .lock-wscript
+# .svn
+# .wafpickle-*
+# CVS
+# npm-debug.log
+# node_modules
+
+*.seed
+*.log
+*.csv
+*.dat
+*.out
+*.pid
+*.gz
+*.orig
+
+__mocks__
+__tests__
+work
+src
+examples
+test
+pids
+logs
+results
+coverage
+lib-cov
+html-report
+xunit.xml
+.babelrc
+.travis.yml
+.codeclimate.yml
+.hound.yml
+.eslint.ym;
+eslit-junit.xml
+
+.project
+.idea
+.settings
+.iml
+*.sublime-workspace
+*.sublime-project
+
+ehthumbs.db
+Icon?
+Thumbs.db
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes

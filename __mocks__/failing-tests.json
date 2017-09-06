@@ -1,0 +1,87 @@
+[
+  {
+    "filePath": "npm packages/eslint-junit/constants/index.js",
+    "messages": [],
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0
+  },
+  {
+    "filePath": "npm packages/eslint-junit/utils/buildJsonResults.js",
+    "messages": [],
+    "errorCount": 0,
+    "warningCount": 0,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0
+  },
+  {
+    "filePath": "npm packages/eslint-junit/utils/getOptions.js",
+    "messages": [
+      {
+        "ruleId": "no-sync",
+        "severity": 1,
+        "message": "Unexpected sync method: 'existsSync'.",
+        "line": 26,
+        "column": 9,
+        "nodeType": "MemberExpression",
+        "source": "    if (fs.existsSync(pkgpath)) {",
+        "endLine": 26,
+        "endColumn": 22
+      }
+    ],
+    "errorCount": 0,
+    "warningCount": 1,
+    "fixableErrorCount": 0,
+    "fixableWarningCount": 0,
+    "source": "/* global process */\nconst path = require('path'); // eslint-disable-line\nconst fs = require('fs');\n\nconst constants = require('../constants/index');\n\nconst getEnvOptions = function getEnvOptions () {\n  const options = {};\n\n  for (const name in constants.ENVIRONMENT_CONFIG_MAP) {\n    if (process.env[name]) {\n      options[constants.ENVIRONMENT_CONFIG_MAP[name]] = process.env[name];\n    }\n  }\n\n  return options;\n};\n\nconst getAppOptions = function getAppOptions (pathToResolve) {\n  const initialPath = pathToResolve;\n\n  // Find nearest package.json by traversing up directories until /\n  while (pathToResolve !== path.sep) {\n    const pkgpath = path.join(pathToResolve, 'package.json');\n\n    if (fs.existsSync(pkgpath)) {\n      let options = (require(pkgpath) || {})['eslint-junit'];\n\n      if (Reflect.apply(Object.prototype.toString, options, []) !== '[object Object]') {\n        options = {};\n      }\n\n      return options;\n    }\n    pathToResolve = path.dirname(pathToResolve); // eslint-disable-line\n  }\n\n  throw new Error(`Unable to locate package.json starting at ${initialPath}`);\n};\n\nmodule.exports = function getOptions () {\n  return Object.assign({}, constants.DEFAULT_OPTIONS, getAppOptions(process.cwd()), getEnvOptions());\n};\n"
+  },
+  {
+    "filePath": "npm packages/eslint-junit/index.js",
+    "messages": [
+      {
+        "ruleId": "no-sync",
+        "severity": 1,
+        "message": "Unexpected sync method: 'realpathSync'.",
+        "line": 25,
+        "column": 48,
+        "nodeType": "MemberExpression",
+        "source": "  const jsonResults = buildJsonResults(report, fs.realpathSync(process.cwd()), options);",
+        "endLine": 25,
+        "endColumn": 63
+      },
+      {
+        "ruleId": "semi",
+        "severity": 2,
+        "message": "Missing semicolon.",
+        "line": 28,
+        "column": 44,
+        "nodeType": "ExpressionStatement",
+        "source": "  mkdirp.sync(path.dirname(options.output))",
+        "fix": {
+          "range": [
+            991,
+            991
+          ],
+          "text": ";"
+        }
+      },
+      {
+        "ruleId": "no-sync",
+        "severity": 1,
+        "message": "Unexpected sync method: 'writeFileSync'.",
+        "line": 31,
+        "column": 3,
+        "nodeType": "MemberExpression",
+        "source": "  fs.writeFileSync(options.output, xml(jsonResults, {'indent': '  '}));",
+        "endLine": 31,
+        "endColumn": 19
+      }
+    ],
+    "errorCount": 1,
+    "warningCount": 2,
+    "fixableErrorCount": 1,
+    "fixableWarningCount": 0,
+    "source": "/* global process */\n\nconst xml = require('xml'); // eslint-disable-line\nconst mkdirp = require('mkdirp');\nconst fs = require('fs');\nconst path = require('path');\n\nconst buildJsonResults = require('./utils/buildJsonResults');\nconst getOptions = require('./utils/getOptions');\n\n/*\n  At the end of ALL of the test suites this method is called\n  It's responsible for generating a single junit.xml file which\n  Represents the status of the test runs\n\n  Expected input and workflow documentation here:\n  https://facebook.github.io/jest/docs/configuration.html#testresultsprocessor-string\n\n  Intended output (junit XML) documentation here:\n  http://help.catchsoftware.com/display/ET/JUnit+Format\n*/\nmodule.exports = (report) => {\n  const options = getOptions();\n  console.log(JSON.stringify(report, null, 2)); // eslint-disable-line\n  const jsonResults = buildJsonResults(report, fs.realpathSync(process.cwd()), options);\n\n  // Ensure output path exists\n  mkdirp.sync(path.dirname(options.output))\n\n  // Write data to file\n  fs.writeFileSync(options.output, xml(jsonResults, {'indent': '  '}));\n\n  return '';\n};\n"
+  }
+]
