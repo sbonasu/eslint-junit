@@ -9,7 +9,7 @@
 [![Test Coverage](https://codeclimate.com/github/jcgertig/eslint-junit/badges/coverage.svg)](https://codeclimate.com/github/jcgertig/eslint-junit/coverage)
 
 # eslint-junit
-A Jest reporter that creates compatible junit xml files
+A eslint reporter that creates compatible junit xml files
 
 ## Installation
 ```shell
