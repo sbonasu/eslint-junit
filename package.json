@@ -1,13 +1,19 @@
 {
   "name": "eslint-junit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A eslint result processor that generates junit xml files",
   "main": "index.js",
   "repository": "https://github.com/jcgertig/eslint-junit",
   "author": "Jonathan Gertig",
   "license": "Apache-2.0",
+  "tags": [
+    "eslint",
+    "junit",
+    "coverage",
+    "ci"
+  ],
   "engines": {
-    "node": ">=4.0.0"
+    "node": ">=6.0.0"
   },
   "files": [
     "index.js",
