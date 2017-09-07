@@ -1,0 +1,16 @@
+engines:
+  eslint:
+    enabled: false
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - javascript:
+ratings:
+  paths:
+  - utils/**
+  - constants/**
+  - index.js
+exclude_paths:
+- "__tests__/**"
+- "__mocks__/**"
