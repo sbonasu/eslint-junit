@@ -53,16 +53,20 @@ module.exports = function buildJsonResults (report, appDirectory, options) {
         ]
       };
 
+      const addTag = function addTag (type) {
+        testCase.testcase.push({[type]: stripAnsi(tc.message)});
+      };
+
       // Write out all failure messages as <failure> tags
       // Nested underneath <testcase> tag
       if (tc.severity === 2) {
-        testCase.testcase.push({'failure': stripAnsi(tc.message)});
+        addTag('failure');
       }
 
       // Write out a <skipped> tag if test is skipped
       // Nested underneath <testcase> tag
       if (tc.severity === 1) {
-        testCase.testcase.push({'skipped': stripAnsi(tc.message)});
+        addTag('skipped');
       }
 
       testSuite.testsuite.push(testCase);
